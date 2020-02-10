@@ -1,0 +1,18 @@
+<div class="big-container product-manage-wrapper flexed-item">
+  <form action="/family/create-family" method="post" class="add-product-form" enctype="multiparty/form-data">
+    {{#if msg}}
+    <p class="msg {{msg.status}}">{{msg.txt}}</p>
+    {{/if}}
+    <h3 class="form-title">Add Family to the collection</h3>
+    <div>
+      <label for="sneacker-name" class="label-name label">Family name</label>
+      <input id="tag_name_input" name="label" type="text" class="input-text input" placeholder="ccc"
+        value="{{label}}">
+    </div>
+    <button class="button-primary add-tag-btn">Add to family list</button>
+  </form>
+</div>
+
+{{> family/navListFamily}}
+
+

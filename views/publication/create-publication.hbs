@@ -1,0 +1,44 @@
+<div class="big-container product-manage-wrapper flexed-item">
+  <form action="/publication/create-publication" method="post" class="add-product-form" enctype="multiparty/form-data">
+    {{#if msg}}
+    <p class="msg {{msg.status}}">{{msg.txt}}</p>
+    {{/if}}
+    <h3 class="form-title">Add Publication to the collection</h3>
+
+    <div>
+      <label for="sneacker-name" class="label-name label">Title</label>
+      <input id="tag_name_input" name="title" type="text" class="input-text input" placeholder="ccc"
+        value="{{label}}">
+    </div>
+    <div>
+      <label for="sneacker-name" class="label-name label">Description</label>
+      <input id="tag_name_input" name="description" type="text" class="input-text input" placeholder="ccc"
+        value="{{label}}">
+    </div>
+    <div class="row">
+        <label for="actif">yes</label>
+        <input id="actif" type="radio" name="actif" value="yes">
+        <label for="not-actif">no</label>
+        <input id="not-actif" type="radio" name="actif" value="no" checked>
+    </div>
+    <div>
+        <label for="sneacker-name" class="label-name label">creationDate</label>
+        <input class="input" id="creationDate" name="creationDate" type="date" value="2020-02-04">
+    </div>
+    <div>
+        <label for="sneacker-name" class="label-name label">lastModificationDate</label>
+        <input class="input" id=lastModificationDate" name="lastModificationDate" type="date" value="2020-02-04">    
+    </div>
+
+    <label for="label">Plant</label>
+    <select name="plant" id="plant" class="input">
+        {{#each plants}}
+            <option value="{{this._id}}">{{this.vernaculaire}}</option>
+        {{/each}}
+    </select>
+
+    <button class="button-primary add-tag-btn">Add to publication list</button>
+  </form>
+</div>
+
+{{> publication/navListPublication}}

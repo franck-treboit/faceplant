@@ -1,0 +1,51 @@
+<h1 class="title">Manage Styles (AJAX)</h1>
+<table class="table styles">
+    <thead class="head">
+        <tr>
+            <th colspan="4">
+                <form method="post" id="form_create_style">
+                    <label for="name">name &gt;</label>
+                    <input id="name" name="name" type="text">
+                    <label for="wikiURL">wiki &gt;</label>
+                    <input id="wikiURL" name="wikiURL" type="text">
+                    <button id="create_style">ok</button>
+                </form>
+            </th>
+        </tr>
+    </thead>
+    <tbody class="body">
+
+        {{#unless styles}}
+        <tr>
+            <td colspan="4">no styles yet</td>
+        </tr>
+        {{/unless}}
+
+        {{#each styles}}
+        <tr data-row-style-id="{{this._id}}">
+            <td class="name">{{this.name}}</td>
+            <td>
+                {{#if this.wikiURL}}
+                <a class="wikiURL" href="{{this.wikiURL}}" target="_blank">
+                    <i class="fa fa-link"></i>
+                </a>
+                {{/if}}
+            </td>
+            <td>
+                {{!-- Caution: AJAX ACTION for edit link !!!! --}}
+                {{!-- check public/js/manage-styles.js --}}
+                <a class="btn edit" data-style-id="{{this._id}}">
+                    {{!-- CAUTION : check no-pointer-events class in public/css/styles.css --}}
+                    <i class="no-pointer-events fas fa-pen"></i>
+                </a>
+            </td>
+            <td>
+                <a href="/delete-style/{{this._id}}">
+                    <i class="fa fa-times"></i>
+                </a>
+            </td>
+        </tr>
+        {{/each}}
+
+    </tbody>
+</table>

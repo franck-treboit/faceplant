@@ -1,0 +1,20 @@
+    <div class="block">
+        <span>styles</span>
+        <a class="link" href="/family/display-one" title="manage styles">
+            <i class="fas fa-list-ul"></i>List all Publications
+        </a>
+    </div>
+
+    <ul>
+      {{#each publications}}
+      <li class="tag-list-item">
+
+            {{this.title}}
+            --
+            {{this.description}}
+            --
+            {{this.plant.vernaculaire}}
+            --
+      </li>
+      {{/each}}
+    </ul>

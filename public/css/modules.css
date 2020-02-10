@@ -1,0 +1,92 @@
+#dashboard-intro {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#dashboard-intro .avatar {
+  height: 50px;
+  width: 50px;
+}
+
+.page > .msg {
+  max-width: 300px;
+  margin: auto;
+  min-height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.msg.error {
+  color: #802b31;
+  background: #f8d6da;
+  box-shadow: -0.3px 0.1px 2.4px 0.1px #802b31;
+}
+
+.msg.success {
+  color: #216136;
+  background: #d4edda;
+  box-shadow: -0.3px 0.1px 2.4px 0.1px #216136;
+}
+
+.table .cover {
+  height: 48px;
+  width: 48px;
+}
+
+.nav {
+  font-size: 0.85rem;
+}
+
+#nav-main {
+  padding: 2px 0 6px;
+}
+
+#nav-admin {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-top: 1px solid whitesmoke;
+  padding: 6px 0 2px;
+}
+
+#nav-admin .block {
+  padding: 0 10px;
+  border-left: 1px solid whitesmoke;
+}
+
+@media (max-width: 540px) {
+  #nav-admin .block {
+    padding: 0 5px;
+  }
+}
+
+#nav-admin .block:last-of-type {
+  border-right: 1px solid whitesmoke;
+}
+
+.logo {
+  font-size: 1rem;
+}
+
+.list.artists,
+.list.albums {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+}
+
+.list.albums .album,
+.list.artists .artist {
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid;
+  padding: 10px;
+  border-radius: 0.3rem;
+}
