@@ -1,11 +1,9 @@
-    <div class="block">
+<div class="block">
  List all Plants
-    </div>
+ </div>
 
-    <ul>
       {{#each plants}}
           <a href="/plant/display-one/{{this._id}}">
-      <li class="tag-list-item">
             {{this.vernaculaire}}
             --
             {{this.family.label}}
@@ -13,10 +11,10 @@
             {{this.autreNom}}
             --
             {{this.cultivar}}
-      </li>
            </a>
+           <a href="/publication/display-all-publication-one-plant/{{this._id}}">Publications de cette plante</a>
+
       {{/each}}
-    </ul>
 
   
 

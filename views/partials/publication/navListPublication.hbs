@@ -1,16 +1,27 @@
 
       {{#each publications}}
-        <div class="pub1">
-            <div  class="pub1A">    
-                 {{this.title}} <span>{{this.creationDate}}</span>
-            </div>    
-            <div  class="pub1B">    
-                {{this.description}}
-            </div>    
-            <div  class="pub1C">    
-                Plante associée : {{this.plant.vernaculaire}}
+      <div class="pub-pub">
+            <div class="pub1">
+                <div  class="pub1A">    
+                     {{this.title}} <span>{{this.creationDate}}</span>
+                </div>    
+                <div  class="pub1B">    
+                    {{this.description}}
+                </div>    
+                <div  class="pub1C">    
+                    Plante associée : {{this.plant.vernaculaire}}
+                </div>
+                <a href="/publication/display-one/{{this._id}}"><div  class="pub1D">Voir toute cette publication</div><a>            
             </div>
-            <a href="/publication/display-one/{{this._id}}"><div  class="pub1D">Voir toute cette publication</div><a>            
-        </div>    
-      
+            <div class="pub2">    
+                <img src="{{this.firstImage}}"  onclick="myAgrandisseur('{{this.firstImage}}')">
+            </div>
+      </div>      
       {{/each}}
+
+    <script>
+        function myAgrandisseur(image) {
+            document.getElementById("agrandisseur").style.display = "block";
+            document.getElementById("agrandisseurImage").src = image ;
+        }
+    </script>

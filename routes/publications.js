@@ -4,6 +4,8 @@ const protectAdminRoute = require("../middlewares/protectAdminRoute");
 const familyModel = require("../models/Family");
 const plantModel = require("../models/Plant");
 const publicationModel = require("../models/Publication");
+const uploader = require("./../config/cloudinary");
+
 
 // *********************************************
 // ALL THESE ROUTES ARE PREFIXED WITh "/styles"
@@ -41,7 +43,7 @@ router.get("/display-one/:id", (req, res, next) => {
         css: ["global.css", "display-one.css"] ,
         js: ["global.js", "display-one.js"] ,
     };   
-    Promise.all([ publicationModel.findById(req.params.id) , publicationModel.find().populate("family")])
+    Promise.all([ publicationModel.findById(req.params.id) , publicationModel.find().populate("plant")])
     .then(dbResult => { 
       res.render("publication/page-publication", {
         publication : dbResult[0], publications: dbResult[1], data : data, 
@@ -49,6 +51,23 @@ router.get("/display-one/:id", (req, res, next) => {
     })
     .catch(next);
 });
+
+
+router.get("/display-all-publication-one-plant/:id", (req, res, next) => {
+    const data = {
+        montitle : "Facepublication d'une seule plante - home",
+        css: ["global.css", "display-one.css"] ,
+        js: ["global.js", "display-one.js"] ,
+    };   
+    Promise.all([ publicationModel.find( { plant : req.params.id} ).populate("plant") ])
+    .then(dbResult => { 
+      res.render("publication/list", {
+        publications : dbResult[0], data : data, 
+      });  
+    })
+    .catch(next);
+});
+
 
 
 router.get("/create-publication",  (req, res, next) => {
@@ -62,10 +81,11 @@ router.get("/create-publication",  (req, res, next) => {
     .catch(next);
 });
 
-router.post("/create-publication",  (req, res, next) => {    
-  const newPlant = req.body;
+router.post("/create-publication", uploader.single("firstImage"), (req, res, next) => {    
+  const newPublication = req.body;
+  if (req.file) newPublication.firstImage = req.file.secure_url;  
   publicationModel
-    .create(newPlant)
+    .create(newPublication)
     .then(dbRes => {
       req.flash("success", "La publication s'est bien créé");
       res.redirect("/publication/create-publication");

@@ -1,17 +1,19 @@
 <div class="big-container product-manage-wrapper flexed-item">
-  <form action="/publication/create-publication" method="post" class="add-product-form" enctype="multiparty/form-data">
+  <form action="/publication/create-publication" method="post" class="add-publication-form" enctype="multipart/form-data">
     {{#if msg}}
     <p class="msg {{msg.status}}">{{msg.txt}}</p>
     {{/if}}
     <h3 class="form-title">Add Publication to the collection</h3>
 
+
+    
     <div>
-      <label for="sneacker-name" class="label-name label">Title</label>
+      <label>Title</label>
       <input id="tag_name_input" name="title" type="text" class="input-text input" placeholder="ccc"
         value="{{label}}">
     </div>
     <div>
-      <label for="sneacker-name" class="label-name label">Description</label>
+      <label>Description</label>
         <textarea class="input" id="description" type="text" name="description">
             {{publication.description}}
         </textarea>
@@ -23,11 +25,11 @@
         <input id="not-actif" type="radio" name="actif" value="no" checked>
     </div>
     <div>
-        <label for="sneacker-name" class="label-name label">creationDate</label>
+        <label>creationDate</label>
         <input class="input" id="creationDate" name="creationDate" type="date" value="2020-02-04">
     </div>
     <div>
-        <label for="sneacker-name" class="label-name label">lastModificationDate</label>
+        <label>lastModificationDate</label>
         <input class="input" id=lastModificationDate" name="lastModificationDate" type="date" value="2020-02-04">    
     </div>
 
@@ -38,8 +40,13 @@
         {{/each}}
     </select>
 
+    <div>
+        <label for="sneacker-name" class="label-name label">Image</label>
+        <input id="input-file" type="file" name="firstImage">
+    </div>
     <button class="button-primary add-tag-btn">Add to publication list</button>
   </form>
 </div>
-Puis liste des publications
+
+<h2>liste des publications existantes</h2>
 {{> publication/navListPublication}}

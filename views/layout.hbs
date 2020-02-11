@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/modules.css">
     <link rel="stylesheet" href="/css/form.css">
+
+    <script src="/js/global.js" type="module"></script>
+
     {{#each css}}
     <link rel="stylesheet" href="/css/{{this}}">
     {{/each}}
@@ -23,6 +26,16 @@
 </head>
 
 <body>
+ 
+    <div id="agrandisseur" class="grand" onclick="myAgrandisseurClose()">
+        <img id="agrandisseurImage" src="{{this.firstImage}}" onclick="myAgrandisseurClose()">
+        <script>
+            function myAgrandisseurClose() {
+                document.getElementById("agrandisseur").style.display = "none";
+            }
+        </script>
+    </div>
+
     <header id="header-main">
         <div class="row space-between">
             <a href="/" class="logo">FacePlant Community</a>
@@ -39,6 +52,7 @@
     </main>
 
     <footer></footer>
+
 
 </body>
 

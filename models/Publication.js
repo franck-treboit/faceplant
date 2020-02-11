@@ -30,6 +30,7 @@ const publicationSchema = new Schema({
   lastModificationDate: Date,
   title: String,
   description: String,
+  firstImage: String,
   plant: {
     type: Schema.Types.ObjectId,
     ref: "Plant",

@@ -61,3 +61,27 @@ hr {
 .col {
   flex-direction: column;
 }
+
+
+
+form.add-publication-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 60px;
+}
+
+
+form.add-publication-form label, form.add-publication-form textarea, form.add-publication-form  select {
+    width: 50%;
+    font-size: 14px;
+    font-weight: bold;
+    height: 20px;
+}
+
+form.add-publication-form input, form.add-publication-form textarea, form.add-publication-form  select {
+    width: 50%;
+    font-size: 14px;
+    font-weight: bold;    
+    height: 25px;
+    margin-bottom: 30px;
+}
