@@ -1,34 +1,54 @@
 <div class="page">
-    <h1 class="title">Home</h1>
+    <h1 class="title">Bienvenue sur le premier réseau social de plante</h1>
+    
+    <section class="home">
+        <div class="all-left">
+            <h2 class="title">Les derniers posts</h2>
+            
+            <div class="all-pub">
+            {{> publication/navListPublication}}        
+            </div>
+           
+            <a href="/publication/list-all">            
+                <div class="liens">
+                   > Voir tous les posts
+                </div>
+                </a>
+            
+            <div class="create-publication">
+                <a href="/publication/create-publication"><button class="button-publication">Poster !</button></a>
+            </div>
 
+        </div>
 
+        <div class="all-right">
+            <div class="edito">
+                <h4>Edito/h4>
+                <p>La je raconte ma vie de boomer pour le bonheur de Paul,
+                La je raconte ma vie de boomer pour le bonheur de Paul, 
+                La je raconte ma vie de boomer pour le bonheur de Paul</p>
+            </div>
+            <div class="all-plants">
+                <h2 class="title">Plant</h2>
+                <div class="plant-home">
+                    {{> plant/navListPlantHome}}
+                </div>
+                <div class="toutes">
+                    <a href="/plant/list-all"><button class="button-publication">Toutes</button></a>
 
+                    <a href="/plant/create-plant"><button class="button-publication">Create</a>
+                </div>      
+            </div>
+            <div class="all-families">
+                <h2 class="title">Family</h2>
+                <div class="plant-home">
+                   {{> family/navListFamilyHome}}
+                </div>
+                <div class="toutes">
+                   <a href="/family/list-all"><button class="button-publication">Toutes</button></a>
 
-
- <h2 class="title">Publication</h2>
-{{> publication/navListPublication}}
- <h2 class="title">Plant</h2>
-{{> plant/navListPlant}}
- <h2 class="title">Family</h2>
-{{> family/navListFamily}}
-
-
-
-
-    <p>
-        <b>Git pull</b> + copy the folder <b>module-2/week-1/day-4/artistify-intro</b><br>
-        then, <b>npm install</b> to fetch the new dependencies
-    </p>
-    <hr>
-    <h2 class="title">.env config</h2>
-
-    <code>
-        PORT = 9999<br>
-        MONGO_URI = mongodb://localhost/artistify-0120<br>
-        SESSION_SECRET = tKS?9AaLongStSringHardTOCrackjQ¨*SA?SA<br>
-    </code>
-    <h2 class="title">Bonus D.I.Y Todos</h2>
-    <ul>
-        <li>implement a <b>shop</b> CRUD system : any admin can create products</li>
-        <li>ProductSchema = {name: String, price: Number, artist: ObjectId, image: String}</li>
-</div>
+                   <a href="/family/create-family"><button class="button-publication">Create</button></a>
+                </div>
+            </div>        
+        </div>
+    </section>

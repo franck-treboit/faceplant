@@ -1,12 +1,11 @@
     <div class="block">
-        <span>styles</span>
-        <a class="link" href="/family/display-one" title="manage styles">
-            <i class="fas fa-list-ul"></i>List all families
-        </a>
-    </div>
+        List all families
+     </div>
 
       {{#each families}}
+      <a href="/family/display-one/{{this._id}}">
       <li class="tag-list-item">
           <label for="input_{{this._id}}">{{this.label}}</label>
       </li>
+      </a>
       {{/each}}

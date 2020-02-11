@@ -12,8 +12,9 @@
     </div>
     <div>
       <label for="sneacker-name" class="label-name label">Description</label>
-      <input id="tag_name_input" name="description" type="text" class="input-text input" placeholder="ccc"
-        value="{{label}}">
+        <textarea class="input" id="description" type="text" name="description">
+            {{publication.description}}
+        </textarea>
     </div>
     <div class="row">
         <label for="actif">yes</label>
@@ -40,5 +41,5 @@
     <button class="button-primary add-tag-btn">Add to publication list</button>
   </form>
 </div>
-
+Puis liste des publications
 {{> publication/navListPublication}}

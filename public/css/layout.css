@@ -1,11 +1,147 @@
 #header-main {
   justify-content: space-between;
-  background: black;
+  background: #0ec35f;
   color: whitesmoke;
   align-items: center;
   padding: 10px 20px;
 }
 
 .page {
-  padding: 40px 20px 60px;
+  padding: 16px 20px 60px;
+}
+
+.home{
+    display: flex;
+    flex-direction: row;
+
+    
+}
+.all-left{
+
+    width:60%;
+    heigth: 100vh;
+    margin-right: 5%;
+    border-right: gray solid 1px;
+    display: flex;
+    flex-direction: column;   
+
+
+}
+
+h2{
+    heigth : 10vh;
+}
+.all-pub{
+    heigth : 60vh;
+    
+}
+
+.liens{
+    heigth : 10vh;
+    font-size: 14px;
+    font-weight: bold;
+    color: aquamarine; 
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+}
+
+
+.create-publication{
+   heigth : 10vh;
+}
+
+.button-publication{
+    background-color: greenyellow;
+    color: black;
+    width: 30%;
+    height: 40px;
+    padding: 10px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 30px;
+}
+
+.all-right{
+    width:25%;
+    heigth: 100vh;
+    display: flex;
+    flex-direction: column; 
+
+
+}
+.edito{
+    heigth : 30vh;
+    border: lightskyblue 1px solid;
+    padding: 10px;
+}
+.all-plants{
+     heigth : 40vh;
+     margin-top : 30px;
+    display: flex;
+    flex-direction: column; 
+}
+.all-families{    
+     heigth : 40vh;
+     margin-top : 30px;
+    display: flex;
+    flex-direction: column; 
+}
+
+.label-family{
+    flex: 1;
+    font-size:13px;
+    color: #4f5a36;
+    margin-bottom: 15px;
+}
+
+.plant-home{
+    font-size:12px;
+    color: darkslateblue;
+    margin-bottom: 15px;
+}
+
+
+.toutes{
+    flex: 1;
+    font-size:16px;
+    color: royalblue;   
+    margin-bottom: 15px;
+}
+.create{
+    flex: 1;
+    font-size:16px;
+    color: orchid;
+    margin-bottom: 15px;
+}
+
+.pub1{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+    width:70%;
+}
+
+.pub1A{
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom: lightgreen solid 1px;
+    margin-bottom: 15px;
+}
+.pub1B{
+    font-size: 12px;
+    font-weight: lighter;
+    margin-bottom: 20px;
+
+}
+.pub1C{
+    font-size: 12px;
+    font-weight: lighter;  
+    margin-bottom: 10px;
+}
+.pub1D{
+    font-size: 11px;
+    font-weight: bold;
+    border-bottom: lawngreen solid 3px;    
 }

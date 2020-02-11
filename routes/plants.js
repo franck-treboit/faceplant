@@ -72,3 +72,26 @@ router.post("/create-plant",  (req, res, next) => {
     })
     .catch(next);
 });
+
+router.get("/update/:id", (req, res, next) => {
+  Promise.all([ plantModel.findById(req.params.id).populate("family") , familyModel.find()])  
+    .then(dbRes => {
+      res.render("plant/update-plant", {
+        plant: dbRes[0], families: dbRes[1]
+      });
+    })
+    .catch(next);
+});
+
+router.post("/update/:id", (req, res, next) => {
+  const { actif,  creationDate,  lastModificationDate,  cultivar,  vernaculaire,  autreNom,  champLibrePourInformationsSupplementaires,  family } = req.body;
+  plantModel
+    .findByIdAndUpdate(req.params.id, {
+      actif,  creationDate,  lastModificationDate,  cultivar,  vernaculaire,  autreNom,  champLibrePourInformationsSupplementaires,  family
+    })
+    .then(() => {
+      req.flash("success", "plant successfully updated");
+      res.redirect("/plant/list-all")
+    })
+    .catch(next);
+});

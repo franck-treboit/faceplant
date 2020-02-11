@@ -73,3 +73,29 @@ router.post("/create-publication",  (req, res, next) => {
     .catch(next);
 });
 
+
+
+router.get("/update/:id", (req, res, next) => {
+  Promise.all([ publicationModel.findById(req.params.id).populate("plant") , plantModel.find()])  
+    .then(dbRes => {
+      res.render("publication/update-publication", {
+        publication: dbRes[0], plants: dbRes[1]
+      });
+    })
+    .catch(next);
+});
+
+router.post("/update/:id", (req, res, next) => {
+  const {  actif,  creationDate, lastModificationDate,  title,  description,  plant } = req.body;
+  publicationModel
+    .findByIdAndUpdate(req.params.id, {
+        actif,  creationDate, lastModificationDate,  title,  description,  plant
+    })
+    .then(() => {
+      req.flash("success", "publication successfully updated");
+      res.redirect("/publication/list-all")
+    })
+    .catch(next);
+});
+
+

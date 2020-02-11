@@ -1,6 +1,14 @@
 one plant
 
 
-{{plant.vernaculaire}}
+{{plante._id}}
+{{plante.vernaculaire}}
+{{plante.nomAutre}}
+{{plante.actif}}
 
+
+<a href="/plant/update/{{plante._id}}">Update this plant</a> 
+
+
+Puis appelle au partials liste des plantes
 {{> plant/navListPlant}}

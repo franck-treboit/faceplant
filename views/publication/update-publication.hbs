@@ -1,0 +1,53 @@
+publication update 
+<div class="big-container product-manage-wrapper flexed-item">
+  <form action="/publication/update/{{publication._id}}" method="post" class="add-product-form" enctype="multiparty/form-data">
+    {{#if msg}}
+    <p class="msg {{msg.status}}">{{msg.txt}}</p>
+    {{/if}}
+    <h3 class="form-title">Update Publication</h3>
+
+    <div>
+      <label for="sneacker-name" class="label-name label">Title</label>
+      <input id="tag_name_input" name="title" type="text" class="input-text input" placeholder="ccc"
+        value="{{publication.title}}">
+    </div>
+    <div>
+      <label for="sneacker-name" class="label-name label">Description</label>
+        <textarea class="input" id="description" type="text" name="description">
+            {{publication.description}}
+        </textarea>
+    </div>
+    <div class="row">        
+         {{#if publication.actif }}
+            <label for="actif">yes</label>
+            <input id="actif" type="radio" name="actif" value="yes" checked>        
+            <label for="not-actif">no</label>
+            <input id="not-actif" type="radio" name="actif" value="no">
+        {{else}}
+            <label for="actif">yes</label>
+            <input id="actif" type="radio" name="actif" value="yes" checked>        
+            <label for="not-actif">no</label>
+            <input id="not-actif" type="radio" name="actif" value="no">
+        {{/if}}
+    </div>
+    <div>
+        <label for="sneacker-name" class="label-name label">creationDate</label>
+        <input class="input" id="creationDate" name="creationDate" type="date" value="{{publication.creationDate}}">
+    </div>
+    <div>
+        <label for="sneacker-name" class="label-name label">lastModificationDate</label>
+        <input class="input" id=lastModificationDate" name="lastModificationDate" type="date" value="{{publication.lastModificationDate}}">    
+    </div>
+
+    <label for="label">Plant</label>
+    <select name="plant" id="plant" class="input">
+        {{#each plants}}
+            <option value="{{this._id}}">{{this.vernaculaire}}</option>
+        {{/each}}
+    </select>
+
+    <button class="button-primary add-tag-btn">Update publication</button>
+  </form>
+</div>
+Puis liste des publications
+{{> publication/navListPublication}}

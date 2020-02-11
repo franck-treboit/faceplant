@@ -1,14 +1,11 @@
     <div class="block">
-        <span>styles</span>
-        <a class="link" href="/family/display-one" title="manage styles">
-            <i class="fas fa-list-ul"></i>List all Plants
-        </a>
+ List all Plants
     </div>
 
     <ul>
       {{#each plants}}
-      <li class="tag-list-item">
           <a href="/plant/display-one/{{this._id}}">
+      <li class="tag-list-item">
             {{this.vernaculaire}}
             --
             {{this.family.label}}
@@ -16,9 +13,8 @@
             {{this.autreNom}}
             --
             {{this.cultivar}}
-
-           </a>
       </li>
+           </a>
       {{/each}}
     </ul>
 

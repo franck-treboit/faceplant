@@ -14,24 +14,36 @@ router.get("/admin", protectAdminRoute, (req, res) => {
   });
 });
 
-module.exports = router;
 
-router.get("/list-all", (HTTPRequest , HTTPResponse ) => {
+
+router.get("/list-all", (req, res, next ) => {
    const data = {
         montitle : "Faceplant Plants - home",
         css: ["global.css", "display-all.css"] ,
         js: ["global.js", "display-all.js"] ,
     };
-   HTTPResponse.render("family/list", data); //data must be an object
+    Promise.all([familyModel.find()])
+    .then(dbResults => {
+      res.render("family/list", {
+        families: dbResults[0], data: data
+      });
+    })
+    .catch(next);    
 });
 
-router.get("/display-one", (HTTPRequest , HTTPResponse ) => {
-   const data = {
-        montitle : "Faceplant Plants - home",
+router.get("/display-one/:id", (HTTPRequest , HTTPResponse, next ) => {
+    const data = {
+        montitle : "Faceplant - home",
         css: ["global.css", "display-one.css"] ,
         js: ["global.js", "display-one.js"] ,
     };   
-   HTTPResponse.render("family/one", data); //data must be an object
+    Promise.all([ familyModel.findById(HTTPRequest.params.id)])
+    .then(dbResult => { 
+      HTTPResponse.render("family/page-family", {
+        family : dbResult[0], data : data, 
+      });  
+    })
+    .catch(next);
 });
 
 router.get("/create-family",  (req, res, next) => {
@@ -55,6 +67,31 @@ router.post("/create-family",  (req, res, next) => {
     .then(dbRes => {
       req.flash("success", "La famille s'est bien créé");
       res.redirect("/family/create-family");
+    })
+    .catch(next);
+});
+
+router.get("/update/:id", (req, res, next) => {
+  Promise.all([
+    familyModel.findById(req.params.id).populate("artist")
+  ])
+    .then(dbRes => {
+      res.render("family/update-family", {
+        family: dbRes[0],
+      });
+    })
+    .catch(next);
+});
+
+router.post("/update/:id", (req, res, next) => {
+  const { label } = req.body;
+  familyModel
+    .findByIdAndUpdate(req.params.id, {
+      label
+    })
+    .then(() => {
+      req.flash("success", "family successfully updated");
+      res.redirect("/family/list-all")
     })
     .catch(next);
 });
