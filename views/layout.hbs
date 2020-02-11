@@ -14,13 +14,13 @@
 
     <script src="/js/global.js" type="module"></script>
 
-    {{#each css}}
+    {{#each data.css}}
     <link rel="stylesheet" href="/css/{{this}}">
     {{/each}}
     {{#if needAJAX}}
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     {{/if}}
-    {{#each js}}
+    {{#each data.js}}
     <script src="/js/{{this}}" type="module"></script>
     {{/each}}
 </head>
