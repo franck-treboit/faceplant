@@ -34,6 +34,8 @@ router.post("/signup", (req, res, next) => {
         const salt = bcrypt.genSaltSync(10); // https://en.wikipedia.org/wiki/Salt_(cryptography)
         const hashed = bcrypt.hashSync(user.password, salt); // generates a secured random hashed password
         user.password = hashed; // new user is ready for db
+        user.creationLogin = date.now();
+        user.lastLogin = date.now();
         userModel
           .create(user)
           .then(() => res.redirect("/auth/signin"))
@@ -45,7 +47,6 @@ router.post("/signup", (req, res, next) => {
 
 router.post("/signin", (req, res, next) => {
   const user = req.body; 
-  console.log("____________________________________________");
   if (!user.email || !user.password) {
     req.flash("error", "wrong credentials");
     return res.redirect("/auth/signin");
@@ -66,8 +67,7 @@ router.post("/signin", (req, res, next) => {
         delete clone.password; // remove password from clone
         req.session.currentUser = clone; // user is now in session... until session.destroy
         return res.redirect("/dashboard");
-      } else {
-          console.log("---------------------D");  
+      } else { 
         // encrypted password match failed
         return res.redirect("/auth/signin");
       }
