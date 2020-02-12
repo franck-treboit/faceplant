@@ -132,6 +132,7 @@ router.post("/create-publication", uploader.single("firstImage"), protectLevelTw
 });
 
 
+
 router.get("/update/:id", protectLevelTwo, (req, res, next) => {
   Promise.all([ publicationModel.findById(req.params.id).populate("plant") , plantModel.find()])  
     .then(dbRes => {
@@ -142,9 +143,11 @@ router.get("/update/:id", protectLevelTwo, (req, res, next) => {
     .catch(next);
 });
 
+
 router.post("/update/:id", protectLevelTwo, (req, res, next) => {
   const newPublication = req.body;
   newPublication.lastModificationDate = Date.now();
+  if (req.file) newPublication.firstImage = req.file.secure_url;
   publicationModel
     .findByIdAndUpdate(req.params.id, 
         newPublication 

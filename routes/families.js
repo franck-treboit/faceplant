@@ -9,21 +9,21 @@ const familyModel = require("../models/Family");
 // ALL THESE ROUTES ARE PREFIXED WITh "/styles"
 // *********************************************
 
-router.get("/admin", protectLevelZero, (req, res) => {
+router.get( protectLevelZero, (req, res) => {
   res.render("tables/styles", {
     js: ["manage-styles"],
     needAJAX: true
   });
 });
 
-router.get("/user", protectLevelOne, (req, res) => {
+router.get( protectLevelOne, (req, res) => {
   res.render("tables/styles", {
     js: ["manage-styles"],
     needAJAX: true
   });
 });
 
-router.get("/prof", protectLevelTwo, (req, res) => {
+router.get( protectLevelTwo, (req, res) => {
   res.render("tables/styles", {
     js: ["manage-styles"],
     needAJAX: true

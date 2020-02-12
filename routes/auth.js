@@ -44,7 +44,8 @@ router.post("/signup", (req, res, next) => {
 });
 
 router.post("/signin", (req, res, next) => {
-  const user = req.body;   
+  const user = req.body; 
+  console.log("____________________________________________");
   if (!user.email || !user.password) {
     req.flash("error", "wrong credentials");
     return res.redirect("/auth/signin");

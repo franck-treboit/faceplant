@@ -10,7 +10,11 @@ const userSchema = new Schema({
   lastConnection: Date,
   role: {
     type: String,
+<<<<<<< HEAD
     enum: ["administrator", "standard", "plants-administrator", "professor", "student", "moderator", "user"],
+=======
+    enum: ["administrator", "standard", "plantsadministrator", "professor", "student", "moderator", "user"],
+>>>>>>> 3dbd8b09e43db6e121fa1cf755a6cfe007648201
     default: "user"
   },
   avatar: {
