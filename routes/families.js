@@ -73,7 +73,7 @@ router.post("/create-family",  (req, res, next) => {
 
 router.get("/update/:id", (req, res, next) => {
   Promise.all([
-    familyModel.findById(req.params.id).populate("artist")
+    familyModel.findById(req.params.id)
   ])
     .then(dbRes => {
       res.render("family/update-family", {

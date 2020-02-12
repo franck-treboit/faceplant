@@ -64,6 +64,8 @@ router.get("/create-plant",  (req, res, next) => {
 
 router.post("/create-plant",  (req, res, next) => {    
   const newPlant = req.body;
+  newPlant.creationDate = Date.now(); 
+  newPlant.lastModificationDate = Date.now(); 
   plantModel
     .create(newPlant)
     .then(dbRes => {
@@ -84,11 +86,11 @@ router.get("/update/:id", (req, res, next) => {
 });
 
 router.post("/update/:id", (req, res, next) => {
-  const { actif,  creationDate,  lastModificationDate,  cultivar,  vernaculaire,  autreNom,  champLibrePourInformationsSupplementaires,  family } = req.body;
+  const newPlant = req.body;
+  newPlant.creationDate = Date.now(); 
+  newPlant.lastModificationDate = Date.now(); 
   plantModel
-    .findByIdAndUpdate(req.params.id, {
-      actif,  creationDate,  lastModificationDate,  cultivar,  vernaculaire,  autreNom,  champLibrePourInformationsSupplementaires,  family
-    })
+    .findByIdAndUpdate(req.params.id, newPlant)
     .then(() => {
       req.flash("success", "plant successfully updated");
       res.redirect("/plant/list-all")

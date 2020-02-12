@@ -6,13 +6,11 @@ const userSchema = new Schema({
   password: String,
   role: {
     type: String,
-    enum: ["admin", "editor", "user"],
-    default: "user"
+    enum: ["admin", "adminPlante", "standard",  "moderator", "professor"],
+    default: "standard",
   },
-  avatar: {
-    type: String,
-    default: "https://cdn.onlinewebfonts.com/svg/img_258083.png"
-  } 
+  lastLogin: Date,
+  creationLogin: Date,  
 });
 
 const userModel = mongoose.model("User", userSchema);
