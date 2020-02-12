@@ -1,6 +1,10 @@
 const express = require("express");
 const router = new express.Router();
 const protectRoute = require("../middlewares/protectRoute");
+const protectStudentRoute = require("../middlewares/protectStudentRoute");
+const protectModeratorRoute = require("../middlewares/protectModeratorRoute");
+const protectAdminPlantsRoute = require("../middlewares/protectAdminPlantsRoute");
+const protectProfRoute = require("../middlewares/protectProfRoute");
 const protectAdminRoute = require("../middlewares/protectAdminRoute");
 const familyModel = require("../models/Family");
 const plantModel = require("../models/Plant");

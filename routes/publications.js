@@ -1,7 +1,11 @@
-const express = require("express");
+const express = require("express");0
 const router = new express.Router();
 const protectAdminRoute = require("../middlewares/protectAdminRoute");
 const familyModel = require("../models/Family");
+const protectStudentRoute = require("../middlewares/protectStudentRoute");
+const protectModeratorRoute = require("../middlewares/protectModeratorRoute");
+const protectAdminPlantsRoute = require("../middlewares/protectAdminPlantsRoute");
+const protectProfRoute = require("../middlewares/protectProfRoute");
 const plantModel = require("../models/Plant");
 const publicationModel = require("../models/Publication");
 const uploader = require("./../config/cloudinary");
@@ -12,6 +16,34 @@ const uploader = require("./../config/cloudinary");
 // *********************************************
 
 router.get("/admin", protectAdminRoute, (req, res) => {
+  res.render("tables/styles", {
+    js: ["manage-styles"],
+    needAJAX: true
+  });
+});
+
+router.get("/prof", protectProfRoute, (req, res) => {
+  res.render("tables/styles", {
+    js: ["manage-styles"],
+    needAJAX: true
+  });
+});
+
+router.get("/student", protectStudentRoute, (req, res) => {
+  res.render("tables/styles", {
+    js: ["manage-styles"],
+    needAJAX: true
+  });
+});
+
+router.get("/moderator", protectModeratorRoute, (req, res) => {
+  res.render("tables/styles", {
+    js: ["manage-styles"],
+    needAJAX: true
+  });
+});
+
+router.get("/adminplants", protectAdminPlantsRoute, (req, res) => {
   res.render("tables/styles", {
     js: ["manage-styles"],
     needAJAX: true
@@ -70,7 +102,7 @@ router.get("/display-all-publication-one-plant/:id", (req, res, next) => {
 
 
 
-router.get("/create-publication",  (req, res, next) => {
+router.get("/create-publication", protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute, (req, res, next) => {
     Promise.all([ publicationModel.find().populate("plant") , plantModel.find()])
     .then(dbResults => {
       res.render("publication/create-publication", {
@@ -81,7 +113,7 @@ router.get("/create-publication",  (req, res, next) => {
     .catch(next);
 });
 
-router.post("/create-publication", uploader.single("firstImage"), (req, res, next) => {    
+router.post("/create-publication", uploader.single("firstImage"), protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute, (req, res, next) => {    
   const newPublication = req.body;
   if (req.file) newPublication.firstImage = req.file.secure_url;  
   publicationModel
@@ -95,7 +127,7 @@ router.post("/create-publication", uploader.single("firstImage"), (req, res, nex
 
 
 
-router.get("/update/:id", (req, res, next) => {
+router.get("/update/:id", protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute, (req, res, next) => {
   Promise.all([ publicationModel.findById(req.params.id).populate("plant") , plantModel.find()])  
     .then(dbRes => {
       res.render("publication/update-publication", {
@@ -105,7 +137,7 @@ router.get("/update/:id", (req, res, next) => {
     .catch(next);
 });
 
-router.post("/update/:id", (req, res, next) => {
+router.post("/update/:id", protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute, (req, res, next) => {
   const {  actif,  creationDate, lastModificationDate,  title,  description,  plant } = req.body;
   publicationModel
     .findByIdAndUpdate(req.params.id, {

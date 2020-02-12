@@ -28,7 +28,7 @@ router.post("/signup", (req, res, next) => {
   // if (req.file) user.avatar = req.file.secure_url;
 
   if (!user.email || !user.password) {
-    req.flash( "error", "do it agian /auth/signup");
+    req.flash( "error", "do it again /auth/signup");
     res.redirect("/auth/signup");
     return;
   } else {
@@ -36,7 +36,7 @@ router.post("/signup", (req, res, next) => {
       .findOne({ email: user.email })
       .then(dbRes => {
         if (dbRes) { 
-            req.flash( "error", "do it agian /auth/signup");
+            req.flash( "error", "do it again /auth/signup");
             return res.redirect("/auth/signup"); //
         }    
 

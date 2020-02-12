@@ -8,6 +8,7 @@ const hbs = require("hbs");
 const path = require("path");
 const flash = require("connect-flash");
 const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 
 // INITAL CONFIG
 app.use(express.urlencoded({ extended: true })); // parse posted data
@@ -46,12 +47,16 @@ app.use(require("./middlewares/exposeLoginStatus"));
 // ROUTING
 app.use("/", require("./routes"));
 app.use("/auth", require("./routes/auth"));
-app.use("/labels", require("./routes/labels"));
-app.use("/styles", require("./routes/styles"));
+
 
 app.use("/family", require("./routes/families"));
 app.use("/plant", require("./routes/plants"));
 app.use("/publication", require("./routes/publications"));
+
+
+app.listen(9999, () => {
+  console.log('My website on port 9999')
+});
 
 // export the app (check import ./bin/www)
 module.exports = app;
