@@ -112,7 +112,7 @@ router.post("/create-family", protectAdminPlantsRoute || protectAdminRoute || pr
 
 router.get("/update/:id",  protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute, (req, res, next) => {
   Promise.all([
-    familyModel.findById(req.params.id).populate("artist")
+    familyModel.findById(req.params.id)
   ])
     .then(dbRes => {
       res.render("family/update-family", {

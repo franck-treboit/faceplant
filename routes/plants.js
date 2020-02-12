@@ -105,6 +105,8 @@ router.get("/create-plant", protectAdminPlantsRoute || protectAdminRoute || prot
 
 router.post("/create-plant", protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute, (req, res, next) => {    
   const newPlant = req.body;
+  newPlant.creationDate = Date.now(); 
+  newPlant.lastModificationDate = Date.now(); 
   plantModel
     .create(newPlant)
     .then(dbRes => {
@@ -124,12 +126,13 @@ router.get("/update/:id", protectAdminPlantsRoute || protectAdminRoute || protec
     .catch(next);
 });
 
+
 router.post("/update/:id", protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute, (req, res, next) => {
-  const { actif,  creationDate,  lastModificationDate,  cultivar,  vernaculaire,  autreNom,  champLibrePourInformationsSupplementaires,  family } = req.body;
+  const newPlant = req.body;
+  newPlant.creationDate = Date.now(); 
+  newPlant.lastModificationDate = Date.now(); 
   plantModel
-    .findByIdAndUpdate(req.params.id, {
-      actif,  creationDate,  lastModificationDate,  cultivar,  vernaculaire,  autreNom,  champLibrePourInformationsSupplementaires,  family
-    })
+    .findByIdAndUpdate(req.params.id, newPlant)
     .then(() => {
       req.flash("success", "plant successfully updated");
       res.redirect("/plant/list-all")

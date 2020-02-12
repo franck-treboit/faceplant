@@ -1,0 +1,8 @@
+<h2>Voir toutes les publications un user</h2>
+      {{#each users}}
+      <div class="pub-pub">
+            <div class="pub1">
+                <a href="/publication/display-all-publication-one-writer/{{this._id}}"><div  class="pub1D">Voir les publications de {{this.email}}</div><a>            
+            </div>
+      </div>      
+      {{/each}}

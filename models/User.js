@@ -15,9 +15,10 @@ const userSchema = new Schema({
   },
   avatar: {
     type: String,
-    default: "https://www.pngkey.com/png/full/115-1150152_default-profile-picture-avatar-png-green.png(19 ko)"
-
-  } 
+    default: "https://www.pngkey.com/png/full/115-1150152_default-profile-picture-avatar-png-green.png(19 ko)",
+  },
+  lastLogin: Date,
+  creationLogin: Date,  
 });
 
 const userModel = mongoose.model("User", userSchema);

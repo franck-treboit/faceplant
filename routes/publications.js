@@ -8,8 +8,8 @@ const protectAdminPlantsRoute = require("../middlewares/protectAdminPlantsRoute"
 const protectProfRoute = require("../middlewares/protectProfRoute");
 const plantModel = require("../models/Plant");
 const publicationModel = require("../models/Publication");
+const userModel = require("../models/User");
 const uploader = require("./../config/cloudinary");
-
 
 // *********************************************
 // ALL THESE ROUTES ARE PREFIXED WITh "/styles"
@@ -52,14 +52,13 @@ router.get("/adminplants", protectAdminPlantsRoute, (req, res) => {
 
 module.exports = router;
 
-
 router.get("/list-all", (HTTPRequest , HTTPResponse, next ) => {
     const data = {
         montitle : "Faceplant - home",
         css: ["global.css", "display-one.css"] ,
         js: ["global.js", "display-one.js"] ,
     };   
-    Promise.all([ publicationModel.find().populate("plant")])
+    Promise.all([ publicationModel.find().populate("plant").populate("writer")])
     .then(dbResult => { 
         console.log(dbResult[0])
         HTTPResponse.render("publication/list", {
@@ -75,7 +74,7 @@ router.get("/display-one/:id", (req, res, next) => {
         css: ["global.css", "display-one.css"] ,
         js: ["global.js", "display-one.js"] ,
     };   
-    Promise.all([ publicationModel.findById(req.params.id) , publicationModel.find().populate("plant")])
+    Promise.all([ publicationModel.findById(req.params.id) , publicationModel.find().populate("plant").populate("writer")])
     .then(dbResult => { 
       res.render("publication/page-publication", {
         publication : dbResult[0], publications: dbResult[1], data : data, 
@@ -84,14 +83,28 @@ router.get("/display-one/:id", (req, res, next) => {
     .catch(next);
 });
 
-
 router.get("/display-all-publication-one-plant/:id", (req, res, next) => {
     const data = {
         montitle : "Facepublication d'une seule plante - home",
-        css: ["global.css", "display-one.css"] ,
-        js: ["global.js", "display-one.js"] ,
+        css: ["global.css", "display-all-publication-one-plant.css"] ,
+        js: ["global.js", "display-all-publication-one-plant.js"] ,
     };   
-    Promise.all([ publicationModel.find( { plant : req.params.id} ).populate("plant") ])
+    Promise.all([ publicationModel.find( { plant : req.params.id} ).populate("plant").populate("writer") ])
+    .then(dbResult => { 
+      res.render("publication/list", {
+        publications : dbResult[0], data : data, 
+      });  
+    })
+    .catch(next);
+});
+
+router.get("/display-all-publication-one-writer/:id", (req, res, next) => {
+    const data = {
+        montitle : "Facepublication d'une seul auteur - home",
+        css: ["global.css", "display-all-publication-one-plant.css"] ,
+        js: ["global.js", "display-all-publication-one-plant.js"] ,
+    };   
+    Promise.all([ publicationModel.find( { writer : req.params.id} ).populate("plant").populate("writer") ])
     .then(dbResult => { 
       res.render("publication/list", {
         publications : dbResult[0], data : data, 
@@ -103,11 +116,16 @@ router.get("/display-all-publication-one-plant/:id", (req, res, next) => {
 
 
 router.get("/create-publication", protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute, (req, res, next) => {
+    const data = {
+        montitle : "Facepublication d'une seule plante - home",
+        css: ["global.css", "create-publication.css"] ,
+        js: ["global.js", "create-publication.js"] ,
+    };  
     Promise.all([ publicationModel.find().populate("plant") , plantModel.find()])
     .then(dbResults => {
       res.render("publication/create-publication", {
         publications: dbResults[0],
-        plants: dbResults[1],
+        plants: dbResults[1], data : data,
       });
     })
     .catch(next);
@@ -115,6 +133,9 @@ router.get("/create-publication", protectAdminPlantsRoute || protectAdminRoute |
 
 router.post("/create-publication", uploader.single("firstImage"), protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute, (req, res, next) => {    
   const newPublication = req.body;
+  newPublication.creationDate = Date.now(); 
+  newPublication.lastModificationDate = Date.now(); 
+  newPublication.writer = req.session.currentUser._id ; 
   if (req.file) newPublication.firstImage = req.file.secure_url;  
   publicationModel
     .create(newPublication)
@@ -124,7 +145,6 @@ router.post("/create-publication", uploader.single("firstImage"), protectAdminPl
     })
     .catch(next);
 });
-
 
 
 router.get("/update/:id", protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute, (req, res, next) => {
@@ -138,11 +158,12 @@ router.get("/update/:id", protectAdminPlantsRoute || protectAdminRoute || protec
 });
 
 router.post("/update/:id", protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute, (req, res, next) => {
-  const {  actif,  creationDate, lastModificationDate,  title,  description,  plant } = req.body;
+  const newPublication = req.body;
+  newPublication.lastModificationDate = Date.now();
   publicationModel
-    .findByIdAndUpdate(req.params.id, {
-        actif,  creationDate, lastModificationDate,  title,  description,  plant
-    })
+    .findByIdAndUpdate(req.params.id, 
+        newPublication 
+    )
     .then(() => {
       req.flash("success", "publication successfully updated");
       res.redirect("/publication/list-all")
