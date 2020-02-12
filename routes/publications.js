@@ -115,7 +115,7 @@ router.get("/display-all-publication-one-writer/:id", (req, res, next) => {
 
 
 
-router.get("/create-publication", protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute, (req, res, next) => {
+router.get("/create-publication", protectAdminPlantsRoute , (req, res, next) => {
     const data = {
         montitle : "Facepublication d'une seule plante - home",
         css: ["global.css", "create-publication.css"] ,
@@ -131,7 +131,7 @@ router.get("/create-publication", protectAdminPlantsRoute || protectAdminRoute |
     .catch(next);
 });
 
-router.post("/create-publication", uploader.single("firstImage"), protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute, (req, res, next) => {    
+router.post("/create-publication", uploader.single("firstImage"),protectProfRoute, (req, res, next) => {    
   const newPublication = req.body;
   newPublication.creationDate = Date.now(); 
   newPublication.lastModificationDate = Date.now(); 
@@ -147,7 +147,7 @@ router.post("/create-publication", uploader.single("firstImage"), protectAdminPl
 });
 
 
-router.get("/update/:id", protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute, (req, res, next) => {
+router.get("/update/:id", protectProfRoute, (req, res, next) => {
   Promise.all([ publicationModel.findById(req.params.id).populate("plant") , plantModel.find()])  
     .then(dbRes => {
       res.render("publication/update-publication", {
@@ -157,9 +157,10 @@ router.get("/update/:id", protectAdminPlantsRoute || protectAdminRoute || protec
     .catch(next);
 });
 
-router.post("/update/:id", protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute, (req, res, next) => {
+router.post("/update/:id", uploader.single("firstImage"), protectAdminRoute , (req, res, next) => {
   const newPublication = req.body;
   newPublication.lastModificationDate = Date.now();
+  if (req.file) newPublication.firstImage = req.file.secure_url;
   publicationModel
     .findByIdAndUpdate(req.params.id, 
         newPublication 

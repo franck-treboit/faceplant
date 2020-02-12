@@ -8,7 +8,6 @@ const hbs = require("hbs");
 const path = require("path");
 const flash = require("connect-flash");
 const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
 
 // INITAL CONFIG
 app.use(express.urlencoded({ extended: true })); // parse posted data
@@ -52,11 +51,6 @@ app.use("/auth", require("./routes/auth"));
 app.use("/family", require("./routes/families"));
 app.use("/plant", require("./routes/plants"));
 app.use("/publication", require("./routes/publications"));
-
-
-app.listen(9999, () => {
-  console.log('My website on port 9999')
-});
 
 // export the app (check import ./bin/www)
 module.exports = app;
