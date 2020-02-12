@@ -6,8 +6,6 @@ const userSchema = new Schema({
   lastname: String,
   email: String,
   password: String,
-  inscription: Date,
-  lastConnection: Date,
   role: {
     type: String,
 <<<<<<< HEAD
