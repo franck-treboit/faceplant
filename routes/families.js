@@ -1,53 +1,29 @@
 const express = require("express");
 const router = new express.Router();
-const protectAdminRoute = require("../middlewares/protectAdminRoute");
-const protectStudentRoute = require("../middlewares/protectStudentRoute");
-const protectModeratorRoute = require("../middlewares/protectModeratorRoute");
-const protectAdminPlantsRoute = require("../middlewares/protectAdminPlantsRoute");
-const protectProfRoute = require("../middlewares/protectProfRoute");
-const protectRoute = require("../middlewares/protectRoute");
+const protectLevelOne = require("../middlewares/protectLevelOne");
+const protectLevelTwo = require("../middlewares/protectLevelTwo");
+const protectLevelZero = require("../middlewares/protectLevelZero");
 const familyModel = require("../models/Family");
 
 // *********************************************
 // ALL THESE ROUTES ARE PREFIXED WITh "/styles"
 // *********************************************
 
-router.get("/admin", protectAdminRoute, (req, res) => {
+router.get("/admin", protectLevelZero, (req, res) => {
   res.render("tables/styles", {
     js: ["manage-styles"],
     needAJAX: true
   });
 });
 
-router.get("/user", protectRoute, (req, res) => {
+router.get("/user", protectLevelOne, (req, res) => {
   res.render("tables/styles", {
     js: ["manage-styles"],
     needAJAX: true
   });
 });
 
-router.get("/prof", protectProfRoute, (req, res) => {
-  res.render("tables/styles", {
-    js: ["manage-styles"],
-    needAJAX: true
-  });
-});
-
-router.get("/student", protectStudentRoute, (req, res) => {
-  res.render("tables/styles", {
-    js: ["manage-styles"],
-    needAJAX: true
-  });
-});
-
-router.get("/moderator", protectModeratorRoute, (req, res) => {
-  res.render("tables/styles", {
-    js: ["manage-styles"],
-    needAJAX: true
-  });
-});
-
-router.get("/adminplants", protectAdminPlantsRoute, (req, res) => {
+router.get("/prof", protectLevelTwo, (req, res) => {
   res.render("tables/styles", {
     js: ["manage-styles"],
     needAJAX: true
@@ -55,7 +31,8 @@ router.get("/adminplants", protectAdminPlantsRoute, (req, res) => {
 });
 
 
-router.get("/list-all", protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute || protectRoute, (req, res, next ) => {
+
+router.get("/list-all", protectLevelOne, (req, res, next ) => {
    const data = {
         montitle : "Faceplant Plants - home",
         css: ["global.css", "display-all.css"] ,
@@ -70,7 +47,7 @@ router.get("/list-all", protectAdminPlantsRoute || protectAdminRoute || protectM
     .catch(next);    
 });
 
-router.get("/display-one/:id", protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute || protectRoute, (HTTPRequest , HTTPResponse, next ) => {
+router.get("/display-one/:id", protectLevelOne, (HTTPRequest , HTTPResponse, next ) => {
     const data = {
         montitle : "Faceplant - home",
         css: ["global.css", "display-one.css"] ,
@@ -85,7 +62,7 @@ router.get("/display-one/:id", protectAdminPlantsRoute || protectAdminRoute || p
     .catch(next);
 });
 
-router.get("/create-family", protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute, (req, res, next) => {
+router.get("/create-family", protectLevelTwo, (req, res, next) => {
     Promise.all([familyModel.find()])
     .then(dbResults => {
       res.render("family/create-family", {
@@ -95,7 +72,7 @@ router.get("/create-family", protectAdminPlantsRoute || protectAdminRoute || pro
     .catch(next);
 });
 
-router.post("/create-family", protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute, (req, res, next) => {    
+router.post("/create-family", protectLevelTwo, (req, res, next) => {    
   const {
     label
   } = req.body;
@@ -110,7 +87,7 @@ router.post("/create-family", protectAdminPlantsRoute || protectAdminRoute || pr
     .catch(next);
 });
 
-router.get("/update/:id",  protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute, (req, res, next) => {
+router.get("/update/:id",  protectLevelTwo, (req, res, next) => {
   Promise.all([
     familyModel.findById(req.params.id)
   ])
@@ -122,7 +99,7 @@ router.get("/update/:id",  protectAdminPlantsRoute || protectAdminRoute || prote
     .catch(next);
 });
 
-router.post("/update/:id", protectAdminPlantsRoute || protectAdminRoute || protectModeratorRoute || protectStudentRoute || protectProfRoute, (req, res, next) => {
+router.post("/update/:id",protectLevelTwo, (req, res, next) => {
   const { label } = req.body;
   familyModel
     .findByIdAndUpdate(req.params.id, {

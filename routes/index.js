@@ -1,11 +1,8 @@
 const express = require("express");
 const router = new express.Router();
-const protectRoute = require("../middlewares/protectRoute");
-const protectStudentRoute = require("../middlewares/protectStudentRoute");
-const protectModeratorRoute = require("../middlewares/protectModeratorRoute");
-const protectAdminPlantsRoute = require("../middlewares/protectAdminPlantsRoute");
-const protectProfRoute = require("../middlewares/protectProfRoute");
-const protectAdminRoute = require("../middlewares/protectAdminRoute");
+const protectLevelZero = require("../middlewares/protectLevelZero");
+const protectLevelTwo = require("../middlewares/protectLevelTwo");
+const protectLevelOne = require("../middlewares/protectLevelOne");
 const familyModel = require("../models/Family");
 const plantModel = require("../models/Plant");
 const publicationModel = require("../models/Publication");
@@ -30,11 +27,11 @@ router.get("/", (req, res, next) => {
     .catch(next);
 });    
     
-router.get("/dashboard", protectRoute, (req, res) => {
+router.get("/dashboard", protectLevelOne, (req, res) => {
   res.render("dashboard");
 });
 
-router.get("/admin", protectAdminRoute, (req, res) => {
+router.get("/admin", protectLevelTwo, (req, res) => {
   res.render("admin");
 });
 
