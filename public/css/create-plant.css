@@ -1,0 +1,36 @@
+
+.add-product-form .input {
+    background: whitesmoke;
+    height: 30px;
+}
+
+.add-product-form .input {
+    display: flex;
+    border-radius: 15px;
+    padding: 5px 0 5px 20px;
+    margin-bottom: 15px;
+    width: 50%;
+    outline: none;
+    margin-top: 10px;
+    margin-left: 20px;
+    cursor: pointer;
+    border: 1px solid green;
+}
+
+.plant-creation-name, label{ 
+    font-size: 16px;
+    color: #0ec35f;
+    margin-left: 30px;
+}
+
+.button-primary, button {
+    width: 50%;
+    cursor: pointer;
+    outline: none;
+    background-color: greenyellow;
+    border: 1px solid green;
+    border-radius: 15px;
+    padding: 5px 0 5px 20px;
+    margin-left: 20px;
+    margin-top: 15px;
+}

@@ -1,0 +1,11 @@
+.button-primary, button {
+    width: 50%;
+    cursor: pointer;
+    outline: none;
+    background-color: greenyellow;
+    border: 1px solid green;
+    border-radius: 5px;
+    padding: 5px 0 5px 20px;
+    margin-left: 20px;
+    margin-top: 15px;
+}

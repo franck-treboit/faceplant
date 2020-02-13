@@ -1,12 +1,12 @@
 Update family
 <div class="big-container product-manage-wrapper flexed-item">
-  <form action="/family/update/{{family._id}}" method="post" class="add-product-form" enctype="multiparty/form-data">
+  <form action="/family/update/{{family._id}}" method="post" class="add-product-form" enctype="multipart/form-data">
     {{#if msg}}
     <p class="msg {{msg.status}}">{{msg.txt}}</p>
     {{/if}}
     <h3 class="form-title">Update Family</h3>
     <div>
-      <label for="sneacker-name" class="label-name label">Family name</label>
+      <label for="family-update-name" class="label-name label">Family name</label>
       <input name="label" type="text" class="input-text input" placeholder="ccc"
         value="{{family.label}}">
     </div>

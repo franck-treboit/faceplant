@@ -8,7 +8,7 @@ const uploader = require("./../config/cloudinary");
 
 
 // *********************************************
-// ALL THESE ROUTES ARE PREFIXED WITh "/styles"
+// ALL THESE ROUTES ARE PREFIXED WITH "/styles"
 // *********************************************
 
 router.get("/admin", protectAdminRoute, (req, res) => {
@@ -20,12 +20,11 @@ router.get("/admin", protectAdminRoute, (req, res) => {
 
 module.exports = router;
 
-
 router.get("/list-all", (HTTPRequest , HTTPResponse, next ) => {
     const data = {
         montitle : "Faceplant - home",
-        css: ["global.css", "display-one.css"] ,
-        js: ["global.js", "display-one.js"] ,
+        css: ["global.css", "list-all.css"],
+        js: ["global.js", "list-all.js"],
     };   
     Promise.all([ publicationModel.find().populate("plant")])
     .then(dbResult => { 
@@ -40,8 +39,8 @@ router.get("/list-all", (HTTPRequest , HTTPResponse, next ) => {
 router.get("/display-one/:id", (req, res, next) => {
     const data = {
         montitle : "Facepublication - home",
-        css: ["global.css", "display-one.css"] ,
-        js: ["global.js", "display-one.js"] ,
+        css: ["global.css", "display-one.css"],
+        js: ["global.js", "display-one.js"],
     };   
     Promise.all([ publicationModel.findById(req.params.id) , publicationModel.find().populate("plant")])
     .then(dbResult => { 
@@ -56,8 +55,8 @@ router.get("/display-one/:id", (req, res, next) => {
 router.get("/display-all-publication-one-plant/:id", (req, res, next) => {
     const data = {
         montitle : "Facepublication d'une seule plante - home",
-        css: ["global.css", "display-one.css"] ,
-        js: ["global.js", "display-one.js"] ,
+        css: ["global.css", "display-all-publication-one-plant.css"],
+        js: ["global.js", "display-all-publication-one-plant.js"],
     };   
     Promise.all([ publicationModel.find( { plant : req.params.id} ).populate("plant") ])
     .then(dbResult => { 
@@ -68,13 +67,15 @@ router.get("/display-all-publication-one-plant/:id", (req, res, next) => {
     .catch(next);
 });
 
-
-
-router.get("/create-publication",  (req, res, next) => {
+router.get("/create-publication", (req, res, next) => {
+  const data = {
+    css: ["global.css", "create-publication.css"],
+    js: ["global.js", "create-publication.js"],
+  };
     Promise.all([ publicationModel.find().populate("plant") , plantModel.find()])
     .then(dbResults => {
       res.render("publication/create-publication", {
-        publications: dbResults[0],
+        publications: dbResults[0], data: data,
         plants: dbResults[1],
       });
     })
@@ -87,19 +88,21 @@ router.post("/create-publication", uploader.single("firstImage"), (req, res, nex
   publicationModel
     .create(newPublication)
     .then(dbRes => {
-      req.flash("success", "La publication s'est bien créé");
+      req.flash("success", "La publication s'est bien créée");
       res.redirect("/publication/create-publication");
     })
     .catch(next);
 });
 
-
-
 router.get("/update/:id", (req, res, next) => {
+  const data = {
+    css: ["global.css", "update-publication.css"],
+    js: ["global.js", "update-publication.js"],
+  };
   Promise.all([ publicationModel.findById(req.params.id).populate("plant") , plantModel.find()])  
     .then(dbRes => {
       res.render("publication/update-publication", {
-        publication: dbRes[0], plants: dbRes[1]
+        publication: dbRes[0], plants: dbRes[1], data: data,
       });
     })
     .catch(next);

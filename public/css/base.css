@@ -32,17 +32,24 @@ a {
 }
 
 hr {
-  margin: 20px 0;
+  margin-left: 20px;
+  margin-top: 15px;
+  width: 100%;
+  margin-bottom: 30px;
+  height: 3px;
+  background-color: lawngreen;
+  border: none;
 }
 
 .title {
   margin-top: 5px;
   margin-bottom: 20px;
   font-size: 1.6rem;
+  color: green;
 }
 
 .link:hover {
-  color: darksalmon;
+  color: green
 }
 
 .row,
@@ -62,20 +69,19 @@ hr {
   flex-direction: column;
 }
 
-
-
 form.add-publication-form {
     display: flex;
     flex-direction: column;
     margin-bottom: 60px;
 }
 
-
-form.add-publication-form label, form.add-publication-form textarea, form.add-publication-form  select {
-    width: 50%;
-    font-size: 14px;
-    font-weight: bold;
-    height: 20px;
+form.add-publication-form label,
+form.add-publication-form textarea,
+form.add-publication-form select {
+  width: 50%;
+  font-size: 14px;
+  font-weight: bold;
+  height: 20px;
 }
 
 form.add-publication-form input, form.add-publication-form textarea, form.add-publication-form  select {

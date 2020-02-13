@@ -5,7 +5,7 @@ const familyModel = require("../models/Family");
 const plantModel = require("../models/Plant");
 
 // *********************************************
-// ALL THESE ROUTES ARE PREFIXED WITh "/styles"
+// ALL THESE ROUTES ARE PREFIXED WITH "/styles"
 // *********************************************
 
 router.get("/admin", (req, res) => {
@@ -20,8 +20,8 @@ module.exports = router;
 router.get("/list-all", (HTTPRequest , HTTPResponse, next ) => {
     const data = {
         montitle : "Faceplant - home",
-        css: ["global.css", "display-one.css"] ,
-        js: ["global.js", "display-one.js"] ,
+        css: ["global.css", "list-all.css"],
+        js: ["global.js", "list-all.js"],
     };   
     Promise.all([ plantModel.find().populate("family")])
     .then(dbResult => { 
@@ -50,13 +50,15 @@ router.get("/display-one/:id", (req, res, next) => {
     .catch(next);
 });
 
-
-router.get("/create-plant",  (req, res, next) => {
+router.get("/create-plant", (req, res, next) => {
+  const data = {
+    css: ["global.css", "create-plant.css"],
+    js: ["global.js", "create-plant.js"],
+  };
     Promise.all([ plantModel.find().populate("family") , familyModel.find()])
     .then(dbResults => {
       res.render("plant/create-plant", {
-        plants: dbResults[0],
-        families: dbResults[1],
+        plants: dbResults[0], families: dbResults[1], data: data,
       });
     })
     .catch(next);
@@ -67,7 +69,7 @@ router.post("/create-plant",  (req, res, next) => {
   plantModel
     .create(newPlant)
     .then(dbRes => {
-      req.flash("success", "La plante s'est bien créé");
+      req.flash("success", "La plante s'est bien créée");
       res.redirect("/plant/create-plant");
     })
     .catch(next);

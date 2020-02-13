@@ -1,54 +1,51 @@
-Plante creation
+Plant creation
 <div class="big-container product-manage-wrapper flexed-item">
-  <form action="/plant/create-plant" method="post" class="add-product-form" enctype="multiparty/form-data">
+  <form action="/plant/create-plant" method="post" class="add-product-form" enctype="multipart/form-data">
     {{#if msg}}
     <p class="msg {{msg.status}}">{{msg.txt}}</p>
     {{/if}}
     <h3 class="form-title">Add Plant to the collection</h3>
+
     <div>
-      <label for="sneacker-name" class="label-name label">Cultivar</label>
-      <input id="cultivar" name="cultivar" type="text" class="input-text input" placeholder="ccc"
-        value="{{label}}">
+      <label for="plant-creation-name" class="label-name label">Cultivar</label>
+      <input id="cultivar" name="cultivar" type="text" class="input-text input" placeholder="ccc" value="{{label}}">
     </div>
+
     <label for="label">Family</label>
     <select name="family" id="family" class="input">
-        {{#each families}}
-            <option value="{{this._id}}">{{this.label}}</option>
-        {{/each}}
+      {{#each families}}
+      <option value="{{this._id}}">{{this.label}}</option>
+      {{/each}}
     </select>
+
     <div>
-      <label for="sneacker-name" class="label-name label">Vernaculaire</label>
+      <label for="plant-creation-name" class="label-name label">Vernaculaire</label>
       <input id="vernaculaire" name="vernaculaire" type="text" class="input-text input" placeholder="ccc"
         value="{{label}}">
     </div>
+
     <div>
-      <label for="sneacker-name" class="label-name label">Autre Nom</label>
-      <input id="autreNom" name="autreNom" type="text" class="input-text input" placeholder="ccc"
+      <label for="plant-creation-name" class="label-name label">Autre Nom</label>
+      <input id="autreNom" name="autreNom" type="text" class="input-text input" placeholder="ccc" value="{{label}}">
+    </div>
+
+    <div>
+      <label for="plant-creation-name" class="label-name label">Informations Supplémentaires</label>
+      <input id="champLibrePourInformationsSupplementaires" name="champLibrePourInformationsSupplementaires" type="text"
+        class="input-text input" placeholder="ccc" value="{{label}}">
+    </div>
+
+    <div>
+      <label for="plant-creation-name" class="label-name label">Image</label>
+      <input id="tag_name_input" name="firstImage" type="text" class="input-text input" placeholder="ccc"
         value="{{label}}">
     </div>
-    <div>
-      <label for="sneacker-name" class="label-name label">champLibrePourInformationsSupplementaires</label>
-      <input id="champLibrePourInformationsSupplementaires" name="champLibrePourInformationsSupplementaires" type="text" class="input-text input" placeholder="ccc"
-        value="{{label}}">
-    </div>
-    <div>
-      <label for="sneacker-name" class="label-name label">image</label>
-       <input id="tag_name_input" name="firstImage" type="text" class="input-text input" placeholder="ccc"
-        value="{{label}}">
-    </div>
+
     <div class="row">
-        <label for="actif">yes</label>
-        <input id="actif" type="radio" name="actif" value="yes" checked>
-        <label for="not-actif">no</label>
-        <input id="not-actif" type="radio" name="actif" value="no">
-    </div>
-    <div>
-        <label for="sneacker-name" class="label-name label">creationDate</label>
-        <input class="input" id="creationDate" name="creationDate" type="date" value="2020-02-04">
-    </div>
-    <div>
-        <label for="sneacker-name" class="label-name label">lastModificationDate</label>
-        <input class="input" id="lastModificationDate" name="lastModificationDate" type="date" value="2020-02-04">
+      <label for="actif">yes</label>
+      <input id="actif" type="radio" name="actif" value="yes" checked>
+      <label for="not-actif">no</label>
+      <input id="not-actif" type="radio" name="actif" value="no">
     </div>
 
     <button class="button-primary add-tag-btn">Add to plant list</button>

@@ -4,7 +4,7 @@ const protectAdminRoute = require("../middlewares/protectAdminRoute");
 const familyModel = require("../models/Family");
 
 // *********************************************
-// ALL THESE ROUTES ARE PREFIXED WITh "/styles"
+// ALL THESE ROUTES ARE PREFIXED WITH "/styles"
 // *********************************************
 
 router.get("/admin", protectAdminRoute, (req, res) => {
@@ -14,13 +14,11 @@ router.get("/admin", protectAdminRoute, (req, res) => {
   });
 });
 
-
-
 router.get("/list-all", (req, res, next ) => {
    const data = {
         montitle : "Faceplant Plants - home",
-        css: ["global.css", "display-all.css"] ,
-        js: ["global.js", "display-all.js"] ,
+     css: ["global.css", "list-all.css"] ,
+     js: ["global.js", "list-all.js"] ,
     };
     Promise.all([familyModel.find()])
     .then(dbResults => {
@@ -34,8 +32,8 @@ router.get("/list-all", (req, res, next ) => {
 router.get("/display-one/:id", (HTTPRequest , HTTPResponse, next ) => {
     const data = {
         montitle : "Faceplant - home",
-        css: ["global.css", "display-one.css"] ,
-        js: ["global.js", "display-one.js"] ,
+        css: ["global.css", "display-one.css"],
+        js: ["global.js", "display-one.js"],
     };   
     Promise.all([ familyModel.findById(HTTPRequest.params.id)])
     .then(dbResult => { 
@@ -46,11 +44,15 @@ router.get("/display-one/:id", (HTTPRequest , HTTPResponse, next ) => {
     .catch(next);
 });
 
-router.get("/create-family",  (req, res, next) => {
+router.get("/create-family", (req, res, next) => {
+  const data = {
+    css: ["global.css", "create-family.css"],
+    js: ["global.js", "create-family.js"],
+  };
     Promise.all([familyModel.find()])
     .then(dbResults => {
       res.render("family/create-family", {
-        families: dbResults[0],
+        families: dbResults[0], data: data,
       });
     })
     .catch(next);
@@ -65,7 +67,7 @@ router.post("/create-family",  (req, res, next) => {
       label,
     })
     .then(dbRes => {
-      req.flash("success", "La famille s'est bien créé");
+      req.flash("success", "La famille s'est bien créée");
       res.redirect("/family/create-family");
     })
     .catch(next);
@@ -73,7 +75,7 @@ router.post("/create-family",  (req, res, next) => {
 
 router.get("/update/:id", (req, res, next) => {
   Promise.all([
-    familyModel.findById(req.params.id).populate("artist")
+    familyModel.findById(req.params.id)
   ])
     .then(dbRes => {
       res.render("family/update-family", {
