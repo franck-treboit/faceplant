@@ -72,12 +72,13 @@ h2 {
     margin-right: 30px;
     outline: none;
     border: 2px solid yellowgreen;
+    margin-bottom: 30px;
 }
 
 .all-right {
     display: flex;
     flex-direction: column;
-    width:25%;
+    width:35%;
 }
 
 .edito{
@@ -188,3 +189,53 @@ h2 {
     font-weight: bold;
     border-bottom: lawngreen solid 3px;    
 }
+
+@media screen and (max-width: 940px) {
+   .all-left {
+       border-right: none;
+   }    
+}    
+
+
+@media screen and (max-width: 640px) {
+    .home {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .all-left {
+        width:100%;
+        border: none;    
+    }
+    .create-publication {
+        text-align: center;
+    }
+    .button-publication {
+        width: 80%;
+        margin-bottom: 30px;
+            
+    }
+    .all-right {
+        margin-top:150px;
+        width:100%;
+    }
+    .toutes {
+        text-align: center;
+    }
+    .pub-pub {
+        flex-direction: column;
+        margin-bottom: 22px;
+    }
+    .pub1 {
+        margin-bottom: 40px;
+        width: 100%;
+    }
+    .pub2 {
+       width: 100%;
+       margin-left: 0;
+    }
+    .pub2 img {
+        width: 100%;
+    }
+}    
+

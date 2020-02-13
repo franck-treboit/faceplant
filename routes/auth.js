@@ -34,8 +34,8 @@ router.post("/signup", (req, res, next) => {
         const salt = bcrypt.genSaltSync(10); // https://en.wikipedia.org/wiki/Salt_(cryptography)
         const hashed = bcrypt.hashSync(user.password, salt); // generates a secured random hashed password
         user.password = hashed; // new user is ready for db
-        user.creationLogin = date.now();
-        user.lastLogin = date.now();
+        user.creationLogin = Date.now();
+        user.lastLogin = Date.now();
         userModel
           .create(user)
           .then(() => res.redirect("/auth/signin"))
