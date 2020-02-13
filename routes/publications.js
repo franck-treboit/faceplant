@@ -160,3 +160,29 @@ router.post("/update/:id", protectLevelTwo, (req, res, next) => {
 });
 
 
+router.post("/ajax-create-publication", uploader.single("firstImage"), (req, res, next) => {
+
+    console.log(req.query.plant);
+    plantModel.findById(req.query.plant)  
+    .then(dbRes => { 
+        const plantLocal = dbRes
+        const newPublication = {};
+        newPublication.title = req.query.title;
+        newPublication.description = req.query.description;
+        newPublication.plant = req.query.plant;
+        newPublication.creationDate = Date.now(); 
+        newPublication.lastModificationDate = Date.now(); 
+        newPublication.writer = req.session.currentUser._id ; 
+        newPublication.firstImage = "https://res.cloudinary.com/franck-treboit/image/upload/v1581603199/user-pictures/hhx2wrqytalracluptrl.jpg";
+        if (req.file) newPublication.firstImage = req.file.secure_url;        
+        publicationModel
+        .create(newPublication)
+        .then(dbResults => {
+          res.send(
+            { "newpub" : newPublication , "email" : req.session.currentUser.email, "plant": plantLocal.cultivar+" "+plantLocal.vernaculaire+" "+plantLocal.autreNom }
+          );
+        })
+        .catch(next);
+    })
+    .catch(next);
+});
