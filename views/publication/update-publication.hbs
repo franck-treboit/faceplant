@@ -1,7 +1,6 @@
 publication update
 <div class="big-container product-manage-wrapper flexed-item">
-  <form action="/publication/update/{{publication._id}}" method="post" class="add-product-form"
-    enctype="multipart/form-data">
+  <form action="/publication/update/{{publication._id}}" method="post" class="add-product-form" enctype="multipart/form-data">
     {{#if msg}}
     <p class="msg {{msg.status}}">{{msg.txt}}</p>
     {{/if}}
@@ -29,6 +28,10 @@ publication update
       <label for="not-actif">no</label>
       <input id="not-actif" type="radio" name="actif" value="no">
       {{/if}}
+    </div>
+    <div>
+        <label for="sneacker-name" class="label-name label">Image</label>
+        <input id="input-file" type="file" name="firstImage">
     </div>
     <label for="label">Plant</label>
     <select name="plant" id="plant" class="input">

@@ -42,7 +42,6 @@ app.use(require("./middlewares/exposeFlashMessage"));
 // expose login status to the hbs templates
 app.use(require("./middlewares/exposeLoginStatus"));
 
-
 // ROUTING
 app.use("/", require("./routes"));
 app.use("/auth", require("./routes/auth"));

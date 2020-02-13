@@ -1,20 +1,36 @@
 const express = require("express");
 const router = new express.Router();
-const protectAdminRoute = require("../middlewares/protectAdminRoute");
+const protectLevelOne = require("../middlewares/protectLevelOne");
+const protectLevelTwo = require("../middlewares/protectLevelTwo");
+const protectLevelZero = require("../middlewares/protectLevelZero");
 const familyModel = require("../models/Family");
 
 // *********************************************
 // ALL THESE ROUTES ARE PREFIXED WITH "/styles"
 // *********************************************
 
-router.get("/admin", protectAdminRoute, (req, res) => {
+router.get( protectLevelZero, (req, res) => {
   res.render("tables/styles", {
     js: ["manage-styles"],
     needAJAX: true
   });
 });
 
-router.get("/list-all", (req, res, next ) => {
+router.get( protectLevelOne, (req, res) => {
+  res.render("tables/styles", {
+    js: ["manage-styles"],
+    needAJAX: true
+  });
+});
+
+router.get( protectLevelTwo, (req, res) => {
+  res.render("tables/styles", {
+    js: ["manage-styles"],
+    needAJAX: true
+  });
+});
+
+router.get("/list-all", protectLevelOne, (req, res, next ) => {
    const data = {
         montitle : "Faceplant Plants - home",
      css: ["global.css", "list-all.css"] ,
@@ -29,7 +45,7 @@ router.get("/list-all", (req, res, next ) => {
     .catch(next);    
 });
 
-router.get("/display-one/:id", (HTTPRequest , HTTPResponse, next ) => {
+router.get("/display-one/:id", protectLevelOne, (HTTPRequest , HTTPResponse, next ) => {
     const data = {
         montitle : "Faceplant - home",
         css: ["global.css", "display-one.css"],
@@ -43,8 +59,7 @@ router.get("/display-one/:id", (HTTPRequest , HTTPResponse, next ) => {
     })
     .catch(next);
 });
-
-router.get("/create-family", (req, res, next) => {
+router.get("/create-family", protectLevelTwo, (req, res, next) => {
   const data = {
     css: ["global.css", "create-family.css"],
     js: ["global.js", "create-family.js"],
@@ -58,7 +73,7 @@ router.get("/create-family", (req, res, next) => {
     .catch(next);
 });
 
-router.post("/create-family",  (req, res, next) => {    
+router.post("/create-family", protectLevelTwo, (req, res, next) => {    
   const {
     label
   } = req.body;
@@ -73,7 +88,7 @@ router.post("/create-family",  (req, res, next) => {
     .catch(next);
 });
 
-router.get("/update/:id", (req, res, next) => {
+router.get("/update/:id",  protectLevelTwo, (req, res, next) => {
   Promise.all([
     familyModel.findById(req.params.id)
   ])
@@ -85,7 +100,7 @@ router.get("/update/:id", (req, res, next) => {
     .catch(next);
 });
 
-router.post("/update/:id", (req, res, next) => {
+router.post("/update/:id",protectLevelTwo, (req, res, next) => {
   const { label } = req.body;
   familyModel
     .findByIdAndUpdate(req.params.id, {
