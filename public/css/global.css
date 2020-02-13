@@ -5,3 +5,24 @@
 .visi {
     display: block;
 }
+
+#form-create-display{
+    
+    
+}
+
+.anth1 {
+   width: 100%;
+   margin-top: 20px;
+}
+
+.input-text-home{
+    width:55%;
+    display:block;
+    height: 40px;
+    background-color: lightgreen;
+    color:black;
+}
+.title-home {
+    margin-left: 0;
+}

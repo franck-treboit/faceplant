@@ -10,7 +10,7 @@ const publicationModel = require("../models/Publication");
 router.get("/", (req, res, next) => {
     const data = {
         montitle : "Faceplant - home",
-        css: ["global.css"] ,
+        css: ["global.css", "create-family.css"] ,
         js: ["global.js"] ,
     };   
     Promise.all([ 
