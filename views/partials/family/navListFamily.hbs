@@ -1,11 +1,12 @@
-    <div class="block">
-        List all families
-     </div>
-
+    <h1>List all families</h1>
+    <div class="families-all">
+      <ul>
       {{#each families}}
       <a href="/family/display-one/{{this._id}}">
       <li class="tag-list-item">
           <label for="input_{{this._id}}">{{this.label}}</label>
       </li>
       </a>
-      {{/each}}
+        {{/each}}
+      </ul>
+    </div>

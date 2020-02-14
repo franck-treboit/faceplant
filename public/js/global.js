@@ -9,12 +9,17 @@ function preparePublication(e) {
         document.getElementById("message-not").classList.add ("visi");
         document.getElementById("form-create-display").classList.add("invisi");
         document.getElementById("form-create-display").classList.remove("visi");    
+        document.getElementById("all-right").classList.remove("invisi-decal");
+        document.getElementById("all-right").classList.add("visi-decal");
+        
     } else {
 
         document.getElementById("message-not").classList.remove("visi");
         document.getElementById("message-not").classList.add("invisi");
         document.getElementById("form-create-display").classList.add("visi");
         document.getElementById("form-create-display").classList.remove("invisi");
+        document.getElementById("all-right").classList.remove("invisi-decal");
+        document.getElementById("all-right").classList.add("visi-decal");
 
     }
 }
