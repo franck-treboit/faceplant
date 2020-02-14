@@ -1,17 +1,17 @@
 <div class="page">
     <h1 class="title">Plants</h1>
-    <table>
+    <table style="width:100%;">
         <thead>
             <th>Id</th>
-            <th>OtherName</th>
             <th>Family</th>
             <th>Cultivar</th>
             <th>Vernaculaire</th>
-            <th>OtherInformations</th>
+            <th>Other Informations</th>
             <th>FirstImage</th>
-            <th>CreationDate</th>
-            <th>LastModificationDate</th>
+            <th>Creation Date</th>
+            <th>Last Modification</th>
             <th>Actif</th>
+            <th>Publication</th>
         </thead>
         <tbody>
             {{#unless plants}}
@@ -20,22 +20,21 @@
             </tr>
             {{/unless}}
             {{#each plants}}
-            <a href="/plant/display-one/{{this._id}}"></a>
+            
             <tr>
-                <td>{{this._id}}</td>
-                <td>{{this.othername}}</td>
-                <td>{{this.family}}</td>
+                <td><a href="/plant/display-one/{{this._id}}">View</a></td>
+                <td>{{this.family.label}}</td>
                 <td>{{this.cultivar}}</td>
                 <td>{{this.vernaculaire}}</td>
                 <td>{{this.otherInformations}}</td>
-                <td>{{this.firstImage}}</td>
+                <td><img src="{{this.firstImage}}" width="150px"></td>
                 <td>{{this.creationDate}}</td>
-                <td>{{this.lastModificationDate}}</td>
-                <td>{{this.actif}}</td>
-                <td>
+                <td><a href="/plant/update/{{this._id}}">{{this.lastModificationDate}}</a></td>
+                <td>{{this.actif}}</td>                
+                <td><a href="/publication/display-all-publication-one-plant/{{this._id}}">Publications</a></td>
             </tr>
             </a>
-            <a href="/publication/display-all-publication-one-plant/{{this._id}}"></a>
+            
             {{/each}}
         </tbody>
     </table>

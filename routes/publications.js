@@ -58,7 +58,7 @@ router.get("/display-one/:id", protectLevelZero, (req, res, next) => {
         css: ["global.css", "display-one.css"],
         js: ["global.js", "display-one.js"],
     };   
-    Promise.all([ publicationModel.findById(req.params.id) , publicationModel.find().populate("plant").populate("writer")])
+    Promise.all([ publicationModel.findById(req.params.id).populate("plant").populate("writer") , publicationModel.find().populate("plant").populate("writer")])
     .then(dbResult => { 
       res.render("publication/page-publication", {
         publication : dbResult[0], publications: dbResult[1], data : data, 

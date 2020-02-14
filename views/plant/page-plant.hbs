@@ -1,14 +1,29 @@
-one plant
+<h1>{{plante.cultivar}}</h1>
 
+<hr>
 
-{{plante._id}}
-{{plante.vernaculaire}}
-{{plante.nomAutre}}
-{{plante.actif}}
+<ul>
+<li>{{plante.cultivar}}</li>
+<li>{{plante.vernaculaire}}</li>
+<li>{{plante.nomAutre}}</li>
+<li>{{plante.actif}}</li>
+<li>{{plante.family.label}}</li>
+<li>{{plante.family.otherInformations}}</li>
+<li>{{plante._id}}</li>
+</ul>
 
+<hr>
+
+<img src="{{plante.firstImage}}" width="300px">
+
+<hr>
+
+<a href="/publication/display-all-publication-one-plant/{{plante._id}}">Publications</a>
+
+<hr>
 
 <a href="/plant/update/{{plante._id}}">Update this plant</a> 
 
+<hr>
 
-Puis appelle au partials liste des plantes
 {{> plant/navListPlant}}

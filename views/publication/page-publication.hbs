@@ -1,11 +1,28 @@
-{{publication._id}}
-{{publication.title}}
-{{publication.description}}
-{{publication.dateCreation}}
-{{publication.lastModificationDate}}
-{{publication.actif}}
-{{publication.writer}}
+<h1>Publication detail</h1>
+      <div class="pub-pub">
+            <div class="pub1">
+                <div  class="pub1A">    
+                     {{publication.title}} <span>{{this.creationDate}}</span>
+                </div>    
+                <div  class="pub1B">    
+                    {{publication.description}}
+                </div>    
+                <div  class="pub1C">    
+                    Plante associée : {{publication.plant.vernaculaire}}
+                </div>
+                <div  class="pub1C">    
+                    Auteur : {{publication.writer.email}}
+                </div>
+            </div>
+            <div class="pub2">    
+                <img src="{{publication.firstImage}}"  onclick="myAgrandisseur('{{this.firstImage}}')">
+            </div>
+      </div>    
+
+<div style="width:100%; background-color:green; height: 3px; margin-bottom: 20px;  margin-top: 20px;"></div>
 
 <a href="/publication/update/{{publication._id}}">Update this publication</a> 
+
+<div style="width:100%; background-color:green; height: 3px; margin-bottom: 60px;  margin-top: 20px;" ></div>
 
 {{> publication/navListPublication}}

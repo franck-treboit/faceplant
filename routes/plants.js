@@ -42,7 +42,7 @@ router.get("/display-one/:id", protectLevelOne, (req, res, next) => {
     .then(dbResult => { 
         console.log(dbResult[1])
       res.render("plant/page-plant", {
-        plants : dbResult[0], plants: dbResult[1], data : data, 
+        plante : dbResult[0], family: dbResult[1], data : data, 
       });  
     })
     .catch(next);
@@ -62,8 +62,7 @@ router.get("/create-plant", protectLevelTwo, (req, res, next) => {
     .catch(next);
 });
 
-router.post("/create-plant", protectLevelTwo, (req, res, next) => {    
-  console.log(req);
+router.post("/create-plant", uploader.single("firstImage"), protectLevelTwo, (req, res, next) => {    
   const newPlant = req.body;
   newPlant.creationDate = Date.now(); 
   newPlant.lastModificationDate = Date.now(); 
