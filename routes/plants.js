@@ -1,6 +1,6 @@
 const express = require("express");
 const router = new express.Router();
-const protectLevelOne = require("../middlewares/protectLevelONE");
+const protectLevelOne = require("../middlewares/protectLevelOne");
 const protectLevelTwo = require("../middlewares/ProtectLevelTwo");
 const protectLevelZero = require("../middlewares/protectLevelZero");
 const familyModel = require("../models/Family");
