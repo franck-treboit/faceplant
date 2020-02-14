@@ -11,28 +11,6 @@ const uploader = require("./../config/cloudinary");
 // ALL THESE ROUTES ARE PREFIXED WITH "/styles"
 // *********************************************
 
-router.get( protectLevelZero, (req, res) => {
-  res.render("tables/styles", {
-    js: ["manage-styles"],
-    needAJAX: true
-  });
-});
-
-router.get( protectLevelOne, (req, res) => {
-  res.render("tables/styles", {
-    js: ["manage-styles"],
-    needAJAX: true
-  });
-});
-
-router.get( protectLevelTwo, (req, res) => {
-  res.render("tables/styles", {
-    js: ["manage-styles"],
-    needAJAX: true
-  });
-});
-
-
 
 module.exports = router;
 
@@ -85,6 +63,7 @@ router.get("/create-plant", protectLevelTwo, (req, res, next) => {
 });
 
 router.post("/create-plant", protectLevelTwo, (req, res, next) => {    
+  console.log(req);
   const newPlant = req.body;
   newPlant.creationDate = Date.now(); 
   newPlant.lastModificationDate = Date.now(); 
@@ -109,6 +88,7 @@ router.get("/update/:id", protectLevelTwo, (req, res, next) => {
 });
 
 router.post("/update/:id", protectLevelTwo, (req, res, next) => {
+  console.log(req.params);  
   const newPlant = req.body;
   newPlant.creationDate = Date.now(); 
   newPlant.lastModificationDate = Date.now();
