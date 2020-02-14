@@ -190,10 +190,27 @@ h2 {
     border-bottom: lawngreen solid 3px;    
 }
 
+
+.families-all {
+    font-size: 16px;
+    color: royalblue;
+    margin-bottom: 15px;
+}
+    
+    
 @media screen and (max-width: 940px) {
    .all-left {
        border-right: none;
    }    
+   
+   .visi-decal {
+     margin-top : 700px;   
+   }
+   
+   .invisi-decal{
+     margin-top : 400px;          
+   }
+   
 }    
 
 
@@ -216,7 +233,7 @@ h2 {
             
     }
     .all-right {
-        margin-top:150px;
+        margin-top:700px;
         width:100%;
     }
     .toutes {
@@ -235,6 +252,9 @@ h2 {
        margin-left: 0;
     }
     .pub2 img {
+        width: 100%;
+    }
+    .input-text-home {
         width: 100%;
     }
 }    

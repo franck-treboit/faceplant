@@ -1,8 +1,14 @@
 <h1 class="title">Dashboard</h1>
 <p id="dashboard-intro">
-    <img class="avatar" src="{{currentUser.avatar}}" alt="user avatar">&nbsp;|&nbsp;Welcome to your dashboard {{currentUser.email}} | 
+    Welcome to your dashboard {{currentUser.email}} | 
 </p>
 <hr>
+
+<p id="dashboard-intro">
+    <a href="/publication/display-all-publication-one-writer/{{currentUser._id}}">See all your publications</a>
+</p>
+<hr>
+
 {{#if isAdmin}}
 <a href="/admin">
     <span>admin panel</span>
@@ -15,8 +21,3 @@
     <i class="fas fa-sign-out-alt"></i>
 </a>
 <hr>
-<h2 class="title">Bonus D.I.Y Todos</h2>
-<ul>
-    <li>provide a form to update user email + password</li>
-    <li>provide a way to update user's avatar</li>
-</ul>
