@@ -13,27 +13,6 @@ const uploader = require("./../config/cloudinary");
 // ALL THESE ROUTES ARE PREFIXED WITH "/styles"
 // *********************************************
 
-router.get("/admin", protectLevelZero, (req, res) => {
-  res.render("tables/styles", {
-    js: ["manage-styles"],
-    needAJAX: true
-  });
-});
-
-router.get("/user", protectLevelOne, (req, res) => {
-  res.render("tables/styles", {
-    js: ["manage-styles"],
-    needAJAX: true
-  });
-});
-
-router.get("/prof", protectLevelTwo, (req, res) => {
-  res.render("tables/styles", {
-    js: ["manage-styles"],
-    needAJAX: true
-  });
-});
-
 module.exports = router;
 
 router.get("/list-all", protectLevelZero,(HTTPRequest , HTTPResponse, next ) => {

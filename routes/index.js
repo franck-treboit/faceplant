@@ -14,7 +14,7 @@ router.get("/", (req, res, next) => {
         js: ["global.js"] ,
     };   
     Promise.all([ 
-        publicationModel.find().populate("plant").limit(2), 
+        publicationModel.find().populate("plant").populate("writer").limit(5), 
         plantModel.find().populate("family").limit(5),
         familyModel.find().limit(3),
         ])
