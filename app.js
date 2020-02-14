@@ -49,9 +49,5 @@ app.use("/family", require("./routes/families"));
 app.use("/plant", require("./routes/plants"));
 app.use("/publication", require("./routes/publications"));
 
-app.listen(9999, () => {
-  console.log('faceplant 9999!')
-});
-
 // export the app (check import ./bin/www)
 module.exports = app;

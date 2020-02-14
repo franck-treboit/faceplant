@@ -1,20 +1,45 @@
-<div class="block">
- List all Plants
- </div>
-
-      {{#each plants}}
-          <a href="/plant/display-one/{{this._id}}">
-            {{this.vernaculaire}}
-            --
-            {{this.family.label}}
-            --
-            {{this.autreNom}}
-            --
-            {{this.cultivar}}
-           </a>
-           <a href="/publication/display-all-publication-one-plant/{{this._id}}">Publications de cette plante</a>
-
-      {{/each}}
+<div class="page">
+    <h1 class="title">Plants</h1>
+    <table>
+        <thead>
+            <th>Id</th>
+            <th>OtherName</th>
+            <th>Family</th>
+            <th>Cultivar</th>
+            <th>Vernaculaire</th>
+            <th>OtherInformations</th>
+            <th>FirstImage</th>
+            <th>CreationDate</th>
+            <th>LastModificationDate</th>
+            <th>Actif</th>
+        </thead>
+        <tbody>
+            {{#unless plants}}
+            <tr>
+                <td colspan="10">sorry, no plants registered yet :/</td>
+            </tr>
+            {{/unless}}
+            {{#each plants}}
+            <a href="/plant/display-one/{{this._id}}"></a>
+            <tr>
+                <td>{{this._id}}</td>
+                <td>{{this.othername}}</td>
+                <td>{{this.family}}</td>
+                <td>{{this.cultivar}}</td>
+                <td>{{this.vernaculaire}}</td>
+                <td>{{this.otherInformations}}</td>
+                <td>{{this.firstImage}}</td>
+                <td>{{this.creationDate}}</td>
+                <td>{{this.lastModificationDate}}</td>
+                <td>{{this.actif}}</td>
+                <td>
+            </tr>
+            </a>
+            <a href="/publication/display-all-publication-one-plant/{{this._id}}"></a>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
 
   
 

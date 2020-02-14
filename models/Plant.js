@@ -8,8 +8,8 @@ const plantSchema = new Schema({
   lastModificationDate: Date,
   cultivar: String,
   vernaculaire: String,
-  autreNom: String,
-  champLibrePourInformationsSupplementaires: String,
+  otherName: String,
+  otherInformations: String,
   firstImage: String,
   family: {
     type: Schema.Types.ObjectId,

@@ -1,4 +1,4 @@
-Plant creation
+
 <div class="big-container product-manage-wrapper flexed-item">
   <form action="/plant/create-plant" method="post" class="add-product-form" enctype="multipart/form-data">
     {{#if msg}}
@@ -25,13 +25,13 @@ Plant creation
     </div>
 
     <div>
-      <label for="plant-creation-name" class="label-name label">Autre Nom</label>
-      <input id="autreNom" name="autreNom" type="text" class="input-text input" placeholder="ccc" value="{{label}}">
+      <label for="plant-creation-name" class="label-name label">OtherName</label>
+      <input id="otherName" name="otherName" type="text" class="input-text input" placeholder="ccc" value="{{label}}">
     </div>
 
     <div>
-      <label for="plant-creation-name" class="label-name label">Informations Supplémentaires</label>
-      <input id="champLibrePourInformationsSupplementaires" name="champLibrePourInformationsSupplementaires" type="text"
+      <label for="plant-creation-name" class="label-name label">OtherInformations</label>
+      <input id="otherInformations" name="otherInformations" type="text"
         class="input-text input" placeholder="ccc" value="{{label}}">
     </div>
 
@@ -41,11 +41,13 @@ Plant creation
         value="{{label}}">
     </div>
 
-    <div class="row">
+    <div class="roow">
+        <div class="statut">Actif
         <label for="actif">yes</label>
         <input id="actif" type="radio" name="actif" value="yes" checked>
         <label for="not-actif">no</label>
         <input id="not-actif" type="radio" name="actif" value="no">
+        </div>
     </div>
 
     <div>
